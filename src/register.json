@@ -1,0 +1,39 @@
+{
+  "project": { "name": "Dust", "domain": "getdust.fun" },
+  "records": {
+    "chain": {
+      "label": "Chain",
+      "state": "stated",
+      "value": "Solana",
+      "rpc": "https://solana-rpc.publicnode.com",
+      "source": "client statement",
+      "scope": "batch-level",
+      "recorded": "2026-10-24"
+    },
+    "ca": {
+      "label": "Contract address",
+      "state": "absent",
+      "recorded": "2026-10-24"
+    },
+    "x": {
+      "label": "X",
+      "state": "stated",
+      "url": "https://x.com/getDustFun",
+      "source": "client statement",
+      "recorded": "2026-10-24"
+    },
+    "github": {
+      "label": "GitHub",
+      "state": "absent",
+      "recorded": "2026-10-24"
+    },
+    "market": {
+      "label": "Market source",
+      "state": "stated",
+      "boosts": "https://api.dexscreener.com/token-boosts/top/v1",
+      "pairs": "https://api.dexscreener.com/tokens/v1/solana/{addresses}",
+      "source": "client statement",
+      "recorded": "2026-10-24"
+    }
+  }
+}

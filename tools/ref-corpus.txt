@@ -1,0 +1,24 @@
+Put a strike and an expiry on every token you hold.
+GUST is a covered-call market on Solana. Lock a bag in a program vault, name the price you would sell at, and a buyer pays you premium today for the right to take it before expiry.
+Open App Buy upside Connect wallet Contract Fees Program Proof
+1,000,000 tokens locked, 1.00 SOL now Sold above 1.50x Premium, SOL Strike 2.20x at expiry
+Drag the strike, the premium ticket and the landing price, or use the arrow keys.
+Expiry You receive at fill If the buyer exercises If it expires unexercised tokens back The buyer pays at most
+How a contract runs One contract account, from lock to a single settlement.
+Lock create_offer Your tokens move into a vault owned by the program, with the strike, the expiry and the premium you ask written into the contract account. Until someone fills it, cancel_unfilled hands the tokens back.
+Seller wallet Buyer wallet Contract vault Service vault
+Fill buy_option The buyer pays the premium. 97% lands in your wallet in the same transaction and 3% goes to the service vault. From this moment the terms are fixed and the collateral cannot be withdrawn.
+Exercise exercise Any time before expiry the buyer can pay the strike in SOL. You receive it minus 0.1%, and the vault releases the tokens to the buyer.
+Or expire expire At expiry anyone can call expire and the vault returns the tokens to you. Exercise and expire race for one settlement: the first to land closes the contract, the other is rejected.
+3% of every premium and 0.1% of every exercise. Here is where each lamport goes.
+Premium and strike go straight from buyer to seller. Only the service fee reaches the program's service vault, and each day the vault is split by the market's current shares.
+Premium filled in a day Service fee that day Revenue Vault time-weighted, to staked Dev buy bought at market and burned Operations team and running costs
+The 20% that buys and burns it After each daily settlement, the dev-buy share buys on the open market, through the same route the app uses, and burns it right after. Each buy and its burn land with their Solscan transactions. See every buy and its burn on Proof
+is an options market for the tokens people already hold. The seller names a price for the bag, the buyer pays for the right to it, and a program vault holds the tokens until a single settlement.
+What happens when every token on Solana, memes first and then anything with a mint, carries a strike, an expiry and a premium someone will pay today?
+Why hold of each day's service fees goes to staked in the Revenue Vault, shared by stake and time staked. A new stake counts from the next daily period. of the same fees buys on the open market and burns it. Every buy and burn is on Proof with its Solscan transaction.
+The fee base is 3% of filled premium and 0.1% of exercised strike, so the vault grows with the number of tokens that get a strike.
+Open App Sell upside Stake App Proof Program
+never DMs you, has no support account, and will never ask for your seed phrase. Official: only.
+covered calls on the tokens you hold
+Skip to content

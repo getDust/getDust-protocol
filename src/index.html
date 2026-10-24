@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dust | Idle tokens, working hours</title>
+<meta name="description" content="Dust prices idle token balances as offers across Solana: freeze a batch, choose an exit level, get paid immediately.">
+<meta name="theme-color" content="{{THEME}}">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400..700&display=swap">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/styles.css">
+<script>document.documentElement.classList.add("js");</script>
+<script type="application/json" id="market-source">{{MARKET_SOURCE}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Jump to main</a>
+<div class="progress" aria-hidden="true"><i data-progress></i></div>
+
+<header class="nav" data-nav>
+  <div class="nav__bar">
+    <a class="brand" href="#top" aria-label="Dust, back to top">
+      <img class="brand__mark" src="assets/dust-logo.png" width="720" height="969" alt="">
+      <span class="brand__word">Dust</span>
+    </a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#market">Market</a>
+      <a href="#mechanics">Mechanics</a>
+      <a href="#fees">Cuts</a>
+      <a href="#records">Records</a>
+    </nav>
+    <div class="nav__right">
+      {{SOCIAL}}
+      <button class="icon-btn nav__menu" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu" data-menu>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="nav__ca">{{CA_TOP}}</div>
+  <nav class="drawer" id="drawer" aria-label="Sections menu" hidden>
+    <a href="#market">Market</a>
+    <a href="#mechanics">Mechanics</a>
+    <a href="#fees">Cuts</a>
+    <a href="#records">Records</a>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero" id="top" data-hero>
+    <div class="mesh" aria-hidden="true">
+      <i class="mesh__blob mesh__blob--a" data-depth="0.35"></i>
+      <i class="mesh__blob mesh__blob--b" data-depth="0.6"></i>
+      <i class="mesh__blob mesh__blob--c" data-depth="0.2"></i>
+      <i class="mesh__grid"></i>
+    </div>
+    <div class="hero__top">
+      <div class="hero__copy">
+        <p class="pill" data-reveal><span class="pill__dot" aria-hidden="true"></span>Built for Solana</p>
+        <h1 data-reveal>Make idle tokens pay rent.</h1>
+        <p class="lede" data-reveal>Freeze any batch, pick an exit level you like, and collect payment straight away from someone wanting first refusal. Nothing sells until they decide.</p>
+        <div class="cta" data-reveal>
+          <a class="btn btn--primary" href="#market">Watch the live market</a>
+          <a class="btn btn--ghost" href="#mechanics">See the mechanics</a>
+        </div>
+      </div>
+      <div class="hero__art" aria-hidden="true" data-reveal>
+        <div class="art" data-parallax>
+          <i class="art__halo" data-depth="0.25"></i>
+          <i class="art__ring art__ring--one" data-depth="0.5"></i>
+          <i class="art__ring art__ring--two" data-depth="0.8"></i>
+          <img class="art__logo" data-depth="1" src="assets/dust-logo.png" width="720" height="969" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="ticket" data-reveal-group>
+      <div class="ticket__chart card" data-spot data-reveal>
+        <svg class="chart" viewBox="0 0 800 300" role="img" aria-label="Rough price line plus draggable exit marker" preserveAspectRatio="none" data-chart>
+          <defs>
+            <linearGradient id="wash" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--accent)" stop-opacity="0.85"/>
+              <stop offset="1" stop-color="var(--accent)" stop-opacity="0.04"/>
+            </linearGradient>
+            <clipPath id="above"><rect data-clip x="0" y="0" width="800" height="150"/></clipPath>
+          </defs>
+          <g class="chart__grid">
+            <path d="M0 50H800M0 100H800M0 150H800M0 200H800M0 250H800"/>
+          </g>
+          <path class="chart__area" clip-path="url(#above)" fill="url(#wash)" d="M0 270C60 255 100 238 160 232S250 190 310 196 380 214 430 190 520 150 560 158 640 110 700 70 760 30 800 20V300H0Z"/>
+          <path class="chart__line" d="M0 270C60 255 100 238 160 232S250 190 310 196 380 214 430 190 520 150 560 158 640 110 700 70 760 30 800 20" fill="none"/>
+          <line class="chart__strike" data-strike-line x1="0" x2="800" y1="150" y2="150"/>
+          <circle class="chart__end" cx="800" cy="20" r="7"/>
+        </svg>
+        <button class="handle" type="button" role="slider" aria-label="Exit level preview handle" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Drag to preview the exit level" data-handle>
+          <span class="handle__grip" aria-hidden="true"></span>
+        </button>
+        <div class="tag tag--exit">Exit level <b>pending</b></div>
+        <div class="tag tag--pay">Up-front payment <b>pending</b></div>
+        <div class="batch"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M4 7V5a4 4 0 1 1 8 0v2h1v7H3V7zm2 0h4V5a2 2 0 1 0-4 0z"/></svg><span><b>pending</b><small>frozen batch</small></span></div>
+        <p class="hint">Slide the handle, or tap arrows on your keyboard, to feel out an exit level.</p>
+      </div>
+
+      <div class="ticket__side">
+        <div class="tiles">
+          <div class="tile card" data-spot data-reveal><span class="tile__k">Frozen batch</span><span class="tile__v">pending</span></div>
+          <div class="tile card" data-spot data-reveal><span class="tile__k">Collateral</span><span class="tile__v">pending</span></div>
+          <div class="tile card tile--hot" data-spot data-reveal><span class="tile__k">Up-front payment</span><span class="tile__v">pending</span></div>
+          <div class="tile card" data-spot data-reveal><span class="tile__k">Exit level</span><span class="tile__v">pending</span></div>
+        </div>
+        <div class="windows" role="radiogroup" aria-label="Offer window" data-reveal>
+          <span class="windows__k">Window</span>
+          <button type="button" role="radio" aria-checked="false" data-win>Brief</button>
+          <button type="button" role="radio" aria-checked="false" data-win>Short</button>
+          <button type="button" role="radio" aria-checked="true" data-win>Mid</button>
+          <button type="button" role="radio" aria-checked="false" data-win>Long</button>
+          <button type="button" role="radio" aria-checked="false" data-win>Wide</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="receipts" data-reveal-group>
+      <article class="receipt card" data-spot data-reveal><h3>Reaches your balance at match</h3><p><b>pending</b><small>sent by whoever matched</small></p></article>
+      <article class="receipt card" data-spot data-reveal><h3>Should they claim it</h3><p><b>pending</b><small>exit amount minus our cut</small></p></article>
+      <article class="receipt card" data-spot data-reveal><h3>Should nobody claim it</h3><p><b>pending</b><small>everything returns home</small></p></article>
+      <article class="receipt card" data-spot data-reveal><h3>Worst case for them</h3><p><b>pending</b><small>what they paid</small></p></article>
+    </div>
+  </section>
+
+  <section class="band" id="market" aria-labelledby="market-h">
+    <div class="wrap">
+      <div class="head" data-reveal>
+        <div>
+          <p class="eyebrow">Market pulse</p>
+          <h2 id="market-h">Where Solana volume is rushing</h2>
+          <p class="sub">Ten busiest boosted tokens, ranked by 24h volume. Pulled live out of an open DEX feed, wholly separate from every other fact below.</p>
+        </div>
+        <div class="status" data-status role="status" aria-live="polite">
+          <span class="pill pill--live" data-pill><span class="pill__dot" aria-hidden="true"></span><span data-pill-text>Syncing</span></span>
+          <span class="status__note" data-status-note>Contacting the feed</span>
+        </div>
+      </div>
+
+      <div class="stats" data-reveal-group>
+        <div class="stat card" data-spot data-reveal><span class="stat__k">Tokens tracked</span><span class="stat__v" data-stat="count">&mdash;</span></div>
+        <div class="stat card" data-spot data-reveal><span class="stat__k">Combined volume</span><span class="stat__v" data-stat="volume">&mdash;</span></div>
+        <div class="stat card" data-spot data-reveal><span class="stat__k">Combined liquidity</span><span class="stat__v" data-stat="liquidity">&mdash;</span></div>
+        <div class="stat card" data-spot data-reveal><span class="stat__k">Strongest mover</span><span class="stat__v" data-stat="mover">&mdash;</span></div>
+      </div>
+
+      <div class="ticker" data-reveal aria-label="Moving strip mirroring tokens listed below" data-ticker>
+        <div class="ticker__track" data-ticker-track></div>
+      </div>
+
+      <div class="market card" data-reveal>
+        <div class="market__bar">
+          <div class="tabs" role="tablist" aria-label="Sort the ten">
+            <button type="button" role="tab" aria-selected="true" data-sort="volume">Volume</button>
+            <button type="button" role="tab" aria-selected="false" data-sort="change">Change</button>
+            <button type="button" role="tab" aria-selected="false" data-sort="liquidity">Liquidity</button>
+          </div>
+          <span class="market__err" data-err hidden></span>
+        </div>
+        <div class="cols" aria-hidden="true"><span>#</span><span>Token</span><span>Price</span><span>24h</span><span>Volume</span><span>Liquidity</span><span></span></div>
+        <ol class="rows" data-rows aria-busy="true"></ol>
+      </div>
+      <p class="toast" data-toast role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="mechanics" aria-labelledby="mech-h">
+    <div class="wrap">
+      <div class="head head--solo" data-reveal>
+        <div>
+          <p class="eyebrow">Mechanics</p>
+          <h2 id="mech-h">One offer, four moves, exactly one ending</h2>
+          <p class="sub">Custody stays inside vault code through every move. Both closing moves can be tried; only one succeeds while its rival bounces.</p>
+        </div>
+      </div>
+      <ol class="steps" data-steps data-reveal-group>
+        <li class="step" data-step data-on>
+          <span class="step__num">01</span>
+          <div class="step__body">
+            <h3>Freeze</h3>
+            <p>Choose a batch of one token. Our vault program takes custody, stamped with exit level, window length and desired payment. Nobody bit yet? Withdraw whenever you wish.</p>
+          </div>
+          <svg class="flow" viewBox="0 0 320 96" aria-hidden="true"><rect class="n n--c" x="8" y="24" width="88" height="48" rx="8"/><rect class="n" x="224" y="24" width="88" height="48" rx="8"/><path class="edge" d="M96 48H224"/><circle class="chip chip--paper" cx="120" cy="48" r="7"/></svg>
+        </li>
+        <li class="step" data-step>
+          <span class="step__num">02</span>
+          <div class="step__body">
+            <h3>Match</h3>
+            <p>Someone pays your asking payment. Nearly all arrives instantly, inside one transaction; a thin slice feeds service costs. Terms then freeze for everybody.</p>
+          </div>
+          <svg class="flow" viewBox="0 0 320 96" aria-hidden="true"><rect class="n" x="8" y="24" width="88" height="48" rx="8"/><rect class="n n--c" x="224" y="24" width="88" height="48" rx="8"/><path class="edge" d="M224 48H96"/><circle class="chip chip--accent" cx="200" cy="48" r="7"/></svg>
+        </li>
+        <li class="step" data-step>
+          <span class="step__num">03</span>
+          <div class="step__body">
+            <h3>Take</h3>
+            <p>Before the window shuts, your counterparty may settle the exit level and walk away holding your batch. Payment stays with you, plus that exit amount, minus a small cut.</p>
+          </div>
+          <svg class="flow" viewBox="0 0 320 96" aria-hidden="true"><rect class="n" x="8" y="24" width="88" height="48" rx="8"/><rect class="n" x="224" y="24" width="88" height="48" rx="8"/><path class="edge" d="M224 48H96"/><circle class="chip chip--ring" cx="160" cy="48" r="7"/></svg>
+        </li>
+        <li class="step" data-step>
+          <span class="step__num">04</span>
+          <div class="step__body">
+            <h3>Lapse</h3>
+            <p>Window elapsed, batch unclaimed? Any wallet can trigger the return, and everything flows back. Claiming and returning compete; whichever confirms earliest wins.</p>
+          </div>
+          <svg class="flow" viewBox="0 0 320 96" aria-hidden="true"><rect class="n n--c" x="8" y="24" width="88" height="48" rx="8"/><rect class="n" x="224" y="24" width="88" height="48" rx="8"/><path class="edge" d="M8 48H224" stroke-dasharray="4 6"/><circle class="chip chip--paper" cx="60" cy="48" r="7"/></svg>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band" id="fees" aria-labelledby="fees-h">
+    <div class="wrap">
+      <div class="head head--solo" data-reveal>
+        <div>
+          <p class="eyebrow">Cuts</p>
+          <h2 id="fees-h">How every cut lands</h2>
+          <p class="sub">Cuts touch payments and claimed batches, never balances left alone. Rates stay pending until final terms go public.</p>
+        </div>
+      </div>
+      <div class="cuts" data-reveal-group>
+        <div class="cut card" data-spot data-reveal><span class="tile__k">Cut on payment</span><span class="tile__v">pending</span></div>
+        <div class="cut card" data-spot data-reveal><span class="tile__k">Cut on a taken batch</span><span class="tile__v">pending</span></div>
+        <div class="cut card cut--hot" data-spot data-reveal><span class="tile__k">Share routed onward</span><span class="tile__v">pending</span></div>
+      </div>
+      <div class="split card" data-reveal data-spot>
+        <div class="split__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <ul class="split__legend">
+          <li><b>Reward pool</b><small>pending</small></li>
+          <li><b>Buyback plus burn</b><small>pending</small></li>
+          <li><b>Operations</b><small>pending</small></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt" id="records" aria-labelledby="rec-h">
+    <div class="wrap">
+      <div class="head head--solo" data-reveal>
+        <div>
+          <p class="eyebrow">Records</p>
+          <h2 id="rec-h">Confirmed facts only</h2>
+          <p class="sub">Every fact below is one record. Unconfirmed entries remain greyed out, with no link or value, once confirmed.</p>
+        </div>
+      </div>
+      <ul class="records" data-reveal-group>{{RECORDS}}</ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__brand">
+      <a class="brand" href="#top" aria-label="Dust, back to top"><img class="brand__mark" src="assets/dust-logo.png" width="720" height="969" alt=""><span class="brand__word">Dust</span></a>
+      <p class="foot__warn">Nobody at Dust messages first or requests recovery phrases. Official home: getdust.fun, nothing else.</p>
+    </div>
+    <nav class="foot__nav" aria-label="Footer">
+      <a href="#market">Market</a><a href="#mechanics">Mechanics</a><a href="#fees">Cuts</a><a href="#records">Records</a>
+    </nav>
+    <div class="foot__ca">{{CA_FOOT}}</div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+<noscript><style>[data-reveal]{opacity:1!important;transform:none!important}</style></noscript>
+</body>
+</html>

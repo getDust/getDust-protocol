@@ -1,0 +1,13 @@
+{
+  "name": "dust",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dust: covered-call offers on Solana.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "gates": "node tools/gates.mjs",
+    "serve": "node tools/serve.mjs"
+  }
+}

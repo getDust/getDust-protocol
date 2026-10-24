@@ -1,0 +1,51 @@
+/*
+  Palette provenance. Every literal colour in the project lives in this file.
+  Method: k-means (k=6) over the opaque brand logo and reference stills, each centroid
+  snapped to the nearest real pixel; coordinates are x,y in the source file.
+    --ground  #1d2cc1  brand/LOGO DUST PNG.png        (0,0)       background field, 94.2% of pixels
+    --accent  #fa4423  brand/LOGO DUST PNG.png        (889,797)   stem and ring orange
+    --paper   #eae3d5  brand/LOGO DUST PNG.png        (953,581)   stem cream
+    --void    #020100  reference/DUST 1.jpg.jpeg      (1268,127)  near-black stage of the product stills
+    --ember   #ac2a12  reference/DUST 1.jpg.jpeg      (999,717)   shaded orange of the product stills
+  Every other tone is derived with color-mix() from these five, never typed.
+*/
+:root {
+  --ground: #1d2cc1;
+  --accent: #fa4423;
+  --paper: #eae3d5;
+  --void: #020100;
+  --ember: #ac2a12;
+
+  --ground-deep: color-mix(in srgb, var(--ground) 38%, var(--void));
+  --ground-raise: color-mix(in srgb, var(--ground) 82%, var(--void));
+  --line: color-mix(in srgb, var(--paper) 16%, var(--ground));
+  --line-strong: color-mix(in srgb, var(--paper) 34%, var(--ground));
+  --paper-dim: color-mix(in srgb, var(--paper) 78%, var(--ground));
+  --paper-mute: color-mix(in srgb, var(--paper) 58%, var(--ground));
+  --accent-hi: color-mix(in srgb, var(--accent) 86%, var(--paper));
+  --accent-deep: color-mix(in srgb, var(--accent) 70%, var(--ember));
+  --accent-text: color-mix(in srgb, var(--accent) 58%, var(--paper));
+  --accent-wash: color-mix(in srgb, var(--accent) 18%, transparent);
+  --on-accent: var(--ground-deep);
+  --ink: var(--ground-deep);
+  --shadow: color-mix(in srgb, var(--void) 55%, transparent);
+  --up: var(--paper);
+  --down: var(--accent-text);
+
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-text: "Archivo", system-ui, sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* easing and timing measured off the reference stylesheet */
+  --ease-out: cubic-bezier(0.16, 0.84, 0.24, 1);
+  --ease-fold: cubic-bezier(0.7, 0, 0.2, 1);
+  --dur-tick: 0.16s;
+  --dur-move: 0.42s;
+
+  --radius-s: 6px;
+  --radius-m: 12px;
+  --radius-pill: 999px;
+  --gutter: clamp(16px, 3.2vw, 48px);
+  --nav-h: 64px;
+  --tap: 44px;
+}
